@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import Profile from '../component/Profile';
 import BorderLine from '../component/BorderLine';
 import GroupName from '../component/GroupName';
+import Footer from '../component/Footer';
 
 export default function Home() {
     const my_info = {
@@ -38,29 +39,47 @@ export default function Home() {
     const friend_count = friend_list.length;
 
     return (
-        <HomeContainer>
-            <Header
-                label={'친구'}
-                icons={['search', 'add-person']}
-                friend_list={friend_list}
-            />
-            <Banner />
-            <MyProfile>
-                <GroupName name={'나'} />
-                <Profile name={my_info.name} profile={my_info.profile} />
-            </MyProfile>
-            <BorderLine />
-            <FriendList friend_count={friend_count} friend_list={friend_list} />
-        </HomeContainer>
+        <>
+            <HomeContainer>
+                <ContentWrapper>
+                    <Header
+                        label={'친구'}
+                        icons={['search', 'add-person']}
+                        friend_list={friend_list}
+                    />
+                    <Banner />
+                    <MyProfile>
+                        <GroupName name={'나'} />
+                        <Profile
+                            name={my_info.name}
+                            profile={my_info.profile}
+                        />
+                    </MyProfile>
+                    <BorderLine />
+                    <FriendList
+                        friend_count={friend_count}
+                        friend_list={friend_list}
+                    />
+                </ContentWrapper>
+                <Footer label={'home'} />
+            </HomeContainer>
+        </>
     );
 }
 
 const HomeContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     width: 500px;
 
     @media (max-width: 500px) {
         width: 100%;
     }
+`;
+
+const ContentWrapper = styled.div`
+    flex: 1;
 `;
 
 const MyProfile = styled.div`

@@ -18,27 +18,25 @@ const FriendList = ({ friend_count, friend_list }) => {
 
     return (
         <>
+            <FriendInfoContainer>
+                <GroupName name={'친구'} />
+                <p style={{ margin: '1rem 1rem' }}>{friend_count}</p>
+            </FriendInfoContainer>
+            <FriendListContainer>
+                {friend_list.map((data, index) => (
+                    <Friend
+                        name={data.name}
+                        profile={data.profile}
+                        id={data.id}
+                        onClick={() => onClick(data.id)}
+                        isClicked={isClickedId === data.id ? true : false}
+                        onDoubleClick={handleDoubleClick}
+                    />
+                ))}
+            </FriendListContainer>
             {isDoubleClicked && (
                 <AddFriend setFriendModalOpen={setIsDoubleClicked} />
             )}
-            <>
-                <FriendInfoContainer>
-                    <GroupName name={'친구'} />
-                    <p style={{ margin: '1rem 1rem' }}>{friend_count}</p>
-                </FriendInfoContainer>
-                <FriendListContainer>
-                    {friend_list.map((data, index) => (
-                        <Friend
-                            name={data.name}
-                            profile={data.profile}
-                            id={data.id}
-                            onClick={() => onClick(data.id)}
-                            isClicked={isClickedId === data.id ? true : false}
-                            onDoubleClick={handleDoubleClick}
-                        />
-                    ))}
-                </FriendListContainer>
-            </>
         </>
     );
 };
