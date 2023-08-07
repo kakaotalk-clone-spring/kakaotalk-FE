@@ -4,7 +4,7 @@ import './AddFriend.css';
 import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
 
-export default function ChattingRoom({ title, name, setSearchModalOpen }) {
+export default function SearchWord({ title, name, setWordModalOpen }) {
     const ref = useRef();
     const [value, setValue] = useState('');
 
@@ -13,7 +13,7 @@ export default function ChattingRoom({ title, name, setSearchModalOpen }) {
         setValue('');
     };
     useOnClickOutside(ref, () => {
-        setSearchModalOpen(false);
+        setWordModalOpen(false);
     });
 
     return (
@@ -22,9 +22,9 @@ export default function ChattingRoom({ title, name, setSearchModalOpen }) {
                 <div className='modal' ref={ref}>
                     <div className='modal__content'>
                         <SearchNavigator>
-                            <p className='modal__details'>친구검색</p>
+                            <p className='modal__details'>단어검색</p>
                             <span
-                                onClick={() => setSearchModalOpen(false)}
+                                onClick={() => setWordModalOpen(false)}
                                 className='modal-close'
                             >
                                 취소
@@ -34,7 +34,7 @@ export default function ChattingRoom({ title, name, setSearchModalOpen }) {
                             value={value}
                             setValue={setValue}
                             type='text'
-                            placeholder='친구를 검색해주세요'
+                            placeholder='단어를 검색해주세요'
                             onSubmit={handleSubmit}
                         />
                     </div>

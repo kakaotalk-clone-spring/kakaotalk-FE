@@ -10,7 +10,7 @@ export default function Chat() {
         <>
             <HomeContainer>
                 <ContentWrapper>
-                    <Header label={'채팅'} icons={['search', 'chat']} />
+                    <Header label={'채팅'} icons={['chat_search', 'chat']} />
                     <Banner />
                     <Friend></Friend>
                 </ContentWrapper>

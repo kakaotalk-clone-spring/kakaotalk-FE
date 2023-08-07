@@ -17,22 +17,52 @@ export default function Home() {
     };
     const friend_list = [
         {
-            name: '홍창현',
+            name: '사람1',
+            profile:
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
+            id: 1,
+        },
+        {
+            name: '사람2',
             profile:
                 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
             id: 2,
         },
         {
-            name: '홍창현',
+            name: '사람3',
             profile:
                 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
             id: 3,
         },
         {
-            name: '홍창현',
+            name: '사람4',
             profile:
                 'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
             id: 4,
+        },
+        {
+            name: '사람5',
+            profile:
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
+            id: 5,
+        },
+        {
+            name: '사람6',
+            profile:
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
+            id: 6,
+        },
+        {
+            name: '사람7',
+            profile:
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
+            id: 7,
+        },
+        {
+            name: '사람8',
+            profile:
+                'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
+            id: 8,
         },
     ];
 
@@ -41,12 +71,12 @@ export default function Home() {
     return (
         <>
             <HomeContainer>
+                <Header
+                    label={'친구'}
+                    icons={['friend_search', 'add-person']}
+                    friend_list={friend_list}
+                />
                 <ContentWrapper>
-                    <Header
-                        label={'친구'}
-                        icons={['search', 'add-person']}
-                        friend_list={friend_list}
-                    />
                     <Banner />
                     <MyProfile>
                         <GroupName name={'나'} />
@@ -71,15 +101,28 @@ const HomeContainer = styled.div`
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 500px;
+    width: 350px;
 
-    @media (max-width: 500px) {
+    @media (max-width: 350px) {
         width: 100%;
     }
 `;
 
 const ContentWrapper = styled.div`
     flex: 1;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: gray;
+        border-radius: 1rem;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: white;
+    }
 `;
 
 const MyProfile = styled.div`

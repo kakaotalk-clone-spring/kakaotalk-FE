@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import { useChattingRoom } from '../contexts/ChattingRoomContext';
 
-const Friend = ({ name, profile, id, onClick, isClicked, onDoubleClick }) => {
+const Friend = ({ name, profile, id, onClick, isClicked }) => {
+    const { handleAddRoom } = useChattingRoom();
+
+    const [isDoubleClicked, setIsDoubleClicked] = useState(false);
+
+    const handleDoubleClick = () => {
+        setIsDoubleClicked(true);
+        const newChattingRoom = {
+            name: `${name}`,
+            profile: ' ',
+            id: Math.floor(Math.random() * 1000),
+        };
+        handleAddRoom(newChattingRoom);
+    };
+    
     return (
         <ProfileContainer
             onClick={onClick}
             isClicked={isClicked}
-            onDoubleClick={onDoubleClick}
+            onDoubleClick={handleDoubleClick}
         >
             <ProfileImg src={profile} />
             <ProfileName>{name}</ProfileName>
