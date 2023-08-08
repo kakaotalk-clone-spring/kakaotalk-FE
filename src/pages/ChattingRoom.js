@@ -85,6 +85,6 @@ const IconGroup = styled.div`
 `;
 
 const SendBox = styled.div`
-    background-color: #fbff47;
+    background-color: #fef01b;
     padding: 0.5rem 1rem;
 `;
