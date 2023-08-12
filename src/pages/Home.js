@@ -110,8 +110,12 @@ const HomeContainer = styled.div`
 
 const ContentWrapper = styled.div`
     flex: 1;
-    overflow-y: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
+
+    &:hover {
+        overflow-y: auto;
+    }
 
     &::-webkit-scrollbar {
         width: 10px;

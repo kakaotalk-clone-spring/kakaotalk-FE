@@ -11,7 +11,7 @@ import Login from './pages/Login';
 
 function App() {
     const { chattingRoom_list } = useChattingRoom();
-    const [isLogined, setIsLogined] = useState(false);
+    const [isLogined, setIsLogined] = useState(true);
 
     if (!isLogined) {
         return (
@@ -19,7 +19,7 @@ function App() {
                 <OutterContainer>
                     <InnerContainer>
                         <Routes>
-                            <Route path='/' element={<Login />}></Route>
+                            <Route path='/login' element={<Login />}></Route>
                         </Routes>
                     </InnerContainer>
                 </OutterContainer>

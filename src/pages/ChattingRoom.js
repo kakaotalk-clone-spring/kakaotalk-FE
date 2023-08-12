@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { AiOutlineSearch, AiOutlinePlus } from 'react-icons/ai';
 import { IoMenuOutline, IoHappyOutline } from 'react-icons/io5';
 import Header from '../component/Header';
 
+// const initialChatData = localStorage.getItem('chatData')
+//     ? JSON.parse(localStorage.getItem('chatData'))
+//     : [];
+
 const ChattingRoom = ({ name, profile, id, handleDelete }) => {
+    // const [chatData, setChatData] = useState(initialChatData);
+    // const [value, setValue] = useState('');
+
+    // const handleChange = (e) => {
+    //     setValue(e.target.value);
+    // };
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+
+    //     let newMessage = {
+    //         id: Date.now(),
+    //         vlaue: value,
+    //     };
+
+    //     // 원래 있던 채팅데이터에 새로운 메시지 더해주기
+    //     setChatData((prev) => [...prev, newMessage]);
+    //     localStorage.setItem(
+    //         'chatData',
+    //         JSON.stringify([...chatData, newMessage])
+    //     );
+    //     setValue('');
+    // };
+
     return (
         <ChattingRoomContainer>
             <Header
@@ -14,9 +42,9 @@ const ChattingRoom = ({ name, profile, id, handleDelete }) => {
                 id={id}
                 handleDelete={handleDelete}
             />
-            <ContentContainer />
+            <ContentContainer></ContentContainer>
             <InputContainer>
-                <InputBox></InputBox>
+                <InputBox />
                 <SendContainer>
                     <IconGroup>
                         <AiOutlinePlus
@@ -84,7 +112,14 @@ const IconGroup = styled.div`
     align-items: center;
 `;
 
-const SendBox = styled.div`
-    background-color: #fef01b;
+const SendBox = styled.button`
+    background-color: #fae100;
     padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:active {
+        opacity: 0.7;
+    }
 `;

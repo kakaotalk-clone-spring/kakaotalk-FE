@@ -11,12 +11,12 @@ const Friend = ({ name, profile, id, onClick, isClicked }) => {
         setIsDoubleClicked(true);
         const newChattingRoom = {
             name: `${name}`,
-            profile: ' ',
+            profile: profile,
             id: Math.floor(Math.random() * 1000),
         };
         handleAddRoom(newChattingRoom);
     };
-    
+
     return (
         <ProfileContainer
             onClick={onClick}

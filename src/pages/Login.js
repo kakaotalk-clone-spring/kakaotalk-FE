@@ -1,31 +1,189 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import kakaotalk_logo from './../img/kakaotalk_logo_edge.png';
+import axios from 'axios';
 
 export default function Login() {
+    const [id, setId] = useState('');
+    const [password, setPassword] = useState('');
+    const [loginEnabled, setLoginEnabled] = useState(false);
+    const [isEncrypted, setIsEncrypted] = useState(true);
+
+    const handleIdChange = (event) => {
+        const newId = event.target.value;
+        setId(newId);
+        checkLoginConditions(newId, password);
+    };
+
+    const handlePasswordChange = (event) => {
+        const newPassword = event.target.value;
+        setPassword(newPassword);
+        checkLoginConditions(id, newPassword);
+    };
+
+    const checkLoginConditions = (id, pwd) => {
+        if (id.length > 0 && pwd.length >= 4) {
+            setLoginEnabled(true);
+        } else {
+            setLoginEnabled(false);
+        }
+    };
+
+    const handleEncryptedPassword = (boolean) => {
+        setIsEncrypted(boolean);
+    };
+
+    const handleLogin = async ({ id, password }) => {
+        try {
+            const response = await axios.post('백엔드 API', {
+                id,
+                password,
+            });
+
+            if (response.data.success) {
+                console.log('로그인 성공');
+            } else {
+                console.log('로그인 실패');
+            }
+        } catch (error) {
+            console.error('로그인 오류:', error);
+        }
+    };
+
     return (
         <LoginContainer>
             <InputContainer>
-                <input placeholder={'아이디를 입력하세요'} />
-                <input placeholder={'비밀번호를 입력하세요'} />
-                {/* <LoginButton></LoginButton> */}
+                <ImageContainer>
+                    <img
+                        src={kakaotalk_logo}
+                        style={{
+                            width: '10rem',
+                            height: '10rem',
+                        }}
+                    />
+                </ImageContainer>
+                <IdContainer
+                    value={id}
+                    onChange={handleIdChange}
+                    placeholder={'아이디'}
+                />
+                <PasswordContainer
+                    value={password}
+                    type={isEncrypted ? 'password' : 'text'}
+                    onChange={handlePasswordChange}
+                    placeholder={'비밀번호'}
+                />
+                <EncryptedIconContainer>
+                    {isEncrypted && (
+                        <IoEyeOffOutline
+                            size={'1rem'}
+                            onClick={() => handleEncryptedPassword(false)}
+                            cursor='pointer'
+                        />
+                    )}
+                    {!isEncrypted && (
+                        <IoEyeOutline
+                            size={'1rem'}
+                            onClick={() => handleEncryptedPassword(true)}
+                            cursor='pointer'
+                        />
+                    )}
+                    <span style={{ fontSize: '0.7rem', fontWeight: '100' }}>
+                        {isEncrypted && '비밀번호 가리기'}
+                        {!isEncrypted && '비밀번호 보기'}
+                    </span>
+                </EncryptedIconContainer>
+                <LoginButton
+                    enabled={loginEnabled}
+                    onClick={({ id, password }) => handleLogin()}
+                >
+                    로그인
+                </LoginButton>
+                <OtherContainer>
+                    <SignInBox>회원가입</SignInBox>
+                    <FindBox>아이디/비밀번호 찾기</FindBox>
+                </OtherContainer>
             </InputContainer>
         </LoginContainer>
     );
 }
 
 const LoginContainer = styled.div`
-    background-color: #fef01b;
+    background-color: #fae100;
     height: 100vh;
     display: flex;
-    align-items: center;
-`;
-
-const InputContainer = styled.div`
-    background-color: gray;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 `;
 
-const LoginButton = styled.button``;
+const InputContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 15rem;
+`;
+
+const ImageContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const IdContainer = styled.input`
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    height: 2rem;
+    border-bottom-color: #f4f4f4;
+    border-bottom-width: 0.01rem;
+    font-size: 0.7rem;
+    font-weight: 100;
+    text-indent: 0.5rem;
+    padding-right: 0.5rem;
+`;
+
+const PasswordContainer = styled(IdContainer)`
+    border: none;
+`;
+
+const EncryptedIconContainer = styled.div`
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    justify-content: right;
+    gap: 0.25rem;
+`;
+
+const LoginButton = styled.button`
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 100;
+    color: ${({ enabled }) => (enabled ? 'white' : 'gray')};
+    background-color: ${({ enabled }) => (enabled ? '#391B1B' : 'white')};
+    cursor: ${({ enabled }) => (enabled ? 'pointer' : 'default')};
+
+    &:active {
+        opacity: ${({ enabled }) => (enabled ? 0.7 : 1)};
+    }
+`;
+
+const OtherContainer = styled.div`
+    font-weight: 100;
+    font-size: 0.7rem;
+
+    display: flex;
+`;
+
+const SignInBox = styled.span`
+    width: 40%;
+    text-align: center;
+    cursor: pointer;
+`;
+
+const FindBox = styled(SignInBox)`
+    width: 60%;
+`;
