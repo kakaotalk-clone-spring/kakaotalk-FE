@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
 
 export default function SearchChatRoom({ title, name, setChatModalOpen }) {
+    // 채팅방추가모달 : 내용추가필요
     const ref = useRef();
     const [value, setValue] = useState('');
 

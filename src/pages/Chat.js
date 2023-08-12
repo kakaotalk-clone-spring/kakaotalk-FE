@@ -6,6 +6,7 @@ import Footer from '../component/Footer';
 import ChattingList from '../component/ChattingList';
 
 export default function Chat() {
+    // 채팅리스트 mock data
     const chatting_list = [
         {
             name: '사람1',

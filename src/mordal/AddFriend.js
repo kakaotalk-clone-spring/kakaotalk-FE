@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
 
 export default function AddFriend({ title, name, setFriendModalOpen }) {
+    // 친구추가모달 : 내용추가필요
     const ref = useRef();
     const [value, setValue] = useState('');
 

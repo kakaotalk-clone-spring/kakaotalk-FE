@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const Banner = ({ img }) => {
+    // 배너
     return <BannerContainer>{img}</BannerContainer>;
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 export default function BorderLine() {
+    // 경계선
     return <BorderLineContainer />;
 }
 

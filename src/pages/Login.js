@@ -10,18 +10,21 @@ export default function Login() {
     const [loginEnabled, setLoginEnabled] = useState(false);
     const [isEncrypted, setIsEncrypted] = useState(true);
 
+    // ID입력
     const handleIdChange = (event) => {
         const newId = event.target.value;
         setId(newId);
         checkLoginConditions(newId, password);
     };
 
+    // Password입력
     const handlePasswordChange = (event) => {
         const newPassword = event.target.value;
         setPassword(newPassword);
         checkLoginConditions(id, newPassword);
     };
 
+    // 간단한 로그인조건 (향후 추가가능)
     const checkLoginConditions = (id, pwd) => {
         if (id.length > 0 && pwd.length >= 4) {
             setLoginEnabled(true);
@@ -30,10 +33,12 @@ export default function Login() {
         }
     };
 
+    // 비밀번호 안보이게 설정
     const handleEncryptedPassword = (boolean) => {
         setIsEncrypted(boolean);
     };
 
+    // 백엔드와 데이터통신(아직확인불가)
     const handleLogin = async ({ id, password }) => {
         try {
             const response = await axios.post('백엔드 API', {

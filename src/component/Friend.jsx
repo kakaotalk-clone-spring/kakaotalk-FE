@@ -4,7 +4,8 @@ import { useChattingRoom } from '../contexts/ChattingRoomContext';
 
 const Friend = ({ name, profile, id, onClick, isClicked }) => {
     const { handleAddRoom } = useChattingRoom();
-
+    
+    // 더블클릭시에 채팅방생성
     const [isDoubleClicked, setIsDoubleClicked] = useState(false);
 
     const handleDoubleClick = () => {

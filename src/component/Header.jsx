@@ -15,7 +15,6 @@ import { useChattingRoom } from '../contexts/ChattingRoomContext';
 
 const Header = ({ label, icons, friend_list, closeFlag, id }) => {
     const { handleDelete } = useChattingRoom();
-
     const [friendmodalOpen, setFriendModalOpen] = useState(false);
     const [searchmodalOpen, setSearchModalOpen] = useState(false);
     const [chatmodalOpen, setChatModalOpen] = useState(false);
@@ -58,6 +57,8 @@ const Header = ({ label, icons, friend_list, closeFlag, id }) => {
         //     [friendData]
         // );
 
+
+        // header에 들어가는 여러 아이콘들을 case별로 정리
         //eslint-disable-next-line default-case
         switch (iconName) {
             case 'friend_search':

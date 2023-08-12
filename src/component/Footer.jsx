@@ -12,6 +12,8 @@ import Home from '../pages/Home';
 import { Link } from 'react-router-dom';
 
 const Footer = ({ label }) => {
+
+    // 친구창화면인지 채팅창화면인지에 따라 Footer 구분 : 설정창도 만들게 된다면 추가예정
     if (label === 'home') {
         return (
             <FooterContainer>

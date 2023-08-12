@@ -13,6 +13,7 @@ function App() {
     const { chattingRoom_list } = useChattingRoom();
     const [isLogined, setIsLogined] = useState(true);
 
+    // 로그인이 안된경우 로그인페이지
     if (!isLogined) {
         return (
             <RootContainer>
@@ -26,6 +27,7 @@ function App() {
             </RootContainer>
         );
     } else {
+        // 현재 반응형으로 구현을 하지 않아서 채팅방이 4개이상이면 스크롤 생성. 삼항연산자로 나눠놓음
         return (
             <RootContainer>
                 <OutterContainer>
