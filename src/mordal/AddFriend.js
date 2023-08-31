@@ -3,6 +3,7 @@ import useOnClickOutside from '../hooks/useOnClickOutside';
 import './AddFriend.css';
 import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
+import axios from "../api/axios"
 
 export default function AddFriend({ title, name, setFriendModalOpen }) {
     // 친구추가모달 : 내용추가필요

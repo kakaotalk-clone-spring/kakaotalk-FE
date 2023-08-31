@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import kakaotalk_logo from './../img/kakaotalk_logo_edge.png';
-import axios from 'axios';
+import axios from '../api/axios';
+import Register from '../mordal/Register';
+import requests from '../api/requests';
 
 export default function Login() {
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [loginEnabled, setLoginEnabled] = useState(false);
     const [isEncrypted, setIsEncrypted] = useState(true);
+    const [registermodalOpen, setRegisterModalOpen] = useState(false);
 
+    const handleRegister = () => {
+        setRegisterModalOpen(true);
+    };
     // ID입력
     const handleIdChange = (event) => {
         const newId = event.target.value;
@@ -39,20 +45,34 @@ export default function Login() {
     };
 
     // 백엔드와 데이터통신(아직확인불가)
-    const handleLogin = async ({ id, password }) => {
+    const handleLogin = async () => {
         try {
-            const response = await axios.post('백엔드 API', {
+            const response = await axios.post(requests.fetchLogin, {
                 id,
                 password,
             });
 
-            if (response.data.success) {
+            if (response.data.isSuccess) {
                 console.log('로그인 성공');
             } else {
-                console.log('로그인 실패');
+                console.log('로그인 실패:', response.data.message);
             }
         } catch (error) {
             console.error('로그인 오류:', error);
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            const response = await axios.get(requests.fetchLogout);
+
+            if (response.data.isSuccess) {
+                console.log('로그아웃 성공');
+            } else {
+                console.log('로그아웃 실패:', response.data.message);
+            }
+        } catch (error) {
+            console.error('로그아웃 오류:', error);
         }
     };
 
@@ -105,8 +125,14 @@ export default function Login() {
                 >
                     로그인
                 </LoginButton>
+                <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
                 <OtherContainer>
-                    <SignInBox>회원가입</SignInBox>
+                    <SignInBox onClick={() => handleRegister()}>
+                        회원가입
+                    </SignInBox>
+                    {registermodalOpen && (
+                        <Register setRegisterModalOpen={setRegisterModalOpen} />
+                    )}
                     <FindBox>아이디/비밀번호 찾기</FindBox>
                 </OtherContainer>
             </InputContainer>
@@ -170,6 +196,22 @@ const LoginButton = styled.button`
     color: ${({ enabled }) => (enabled ? 'white' : 'gray')};
     background-color: ${({ enabled }) => (enabled ? '#391B1B' : 'white')};
     cursor: ${({ enabled }) => (enabled ? 'pointer' : 'default')};
+
+    &:active {
+        opacity: ${({ enabled }) => (enabled ? 0.7 : 1)};
+    }
+`;
+
+const LogoutButton = styled.button`
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 100;
+    color: white;
+    background-color: #391b1b;
+    cursor: pointer;
 
     &:active {
         opacity: ${({ enabled }) => (enabled ? 0.7 : 1)};
