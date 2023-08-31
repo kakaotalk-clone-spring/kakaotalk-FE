@@ -11,7 +11,7 @@ import Login from './pages/Login';
 
 function App() {
     const { chattingRoom_list } = useChattingRoom();
-    const [isLogined, setIsLogined] = useState(true);
+    const [isLogined, setIsLogined] = useState(false);
 
     if (!isLogined) {
         return (
