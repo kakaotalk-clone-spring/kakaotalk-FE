@@ -6,22 +6,66 @@ import Chat from './pages/Chat';
 import ChattingRoom from './pages/ChattingRoom';
 import { HorizonScrallBar } from './component/HorizonScrallBar';
 import { useChattingRoom } from './contexts/ChattingRoomContext';
+import { useState } from 'react';
+import Login from './pages/Login';
 
 function App() {
     const { chattingRoom_list } = useChattingRoom();
+    const [isLogined, setIsLogined] = useState(true);
 
-    return (
-        <RootContainer>
-            <OutterContainer>
-                {chattingRoom_list.length >= 4 ? (
-                    <>
-                        <InnerContainer>
-                            <Routes>
-                                <Route path='/' element={<Home />}></Route>
-                                <Route path='/chat' element={<Chat />}></Route>
-                            </Routes>
-                        </InnerContainer>
-                        <HorizonScrallBar>
+    // 로그인이 안된경우 로그인페이지
+    if (!isLogined) {
+        return (
+            <RootContainer>
+                <OutterContainer>
+                    <InnerContainer>
+                        <Routes>
+                            <Route path='/login' element={<Login />}></Route>
+                        </Routes>
+                    </InnerContainer>
+                </OutterContainer>
+            </RootContainer>
+        );
+    } else {
+        // 현재 반응형으로 구현을 하지 않아서 채팅방이 4개이상이면 스크롤 생성. 삼항연산자로 나눠놓음
+        return (
+            <RootContainer>
+                <OutterContainer>
+                    {chattingRoom_list.length >= 4 ? (
+                        <>
+                            <InnerContainer>
+                                <Routes>
+                                    <Route path='/' element={<Home />}></Route>
+                                    <Route
+                                        path='/chat'
+                                        element={<Chat />}
+                                    ></Route>
+                                </Routes>
+                            </InnerContainer>
+                            <HorizonScrallBar>
+                                <ChattingContainer>
+                                    {chattingRoom_list.map((data, index) => (
+                                        <ChattingRoom
+                                            key={data.id}
+                                            name={data.name}
+                                            profile={data.profile}
+                                            id={data.id}
+                                        />
+                                    ))}
+                                </ChattingContainer>
+                            </HorizonScrallBar>
+                        </>
+                    ) : (
+                        <>
+                            <InnerContainer>
+                                <Routes>
+                                    <Route path='/' element={<Home />}></Route>
+                                    <Route
+                                        path='/chat'
+                                        element={<Chat />}
+                                    ></Route>
+                                </Routes>
+                            </InnerContainer>
                             <ChattingContainer>
                                 {chattingRoom_list.map((data, index) => (
                                     <ChattingRoom
@@ -32,31 +76,12 @@ function App() {
                                     />
                                 ))}
                             </ChattingContainer>
-                        </HorizonScrallBar>
-                    </>
-                ) : (
-                    <>
-                        <InnerContainer>
-                            <Routes>
-                                <Route path='/' element={<Home />}></Route>
-                                <Route path='/chat' element={<Chat />}></Route>
-                            </Routes>
-                        </InnerContainer>
-                        <ChattingContainer>
-                            {chattingRoom_list.map((data, index) => (
-                                <ChattingRoom
-                                    key={data.id}
-                                    name={data.name}
-                                    profile={data.profile}
-                                    id={data.id}
-                                />
-                            ))}
-                        </ChattingContainer>
-                    </>
-                )}
-            </OutterContainer>
-        </RootContainer>
-    );
+                        </>
+                    )}
+                </OutterContainer>
+            </RootContainer>
+        );
+    }
 }
 
 export default App;

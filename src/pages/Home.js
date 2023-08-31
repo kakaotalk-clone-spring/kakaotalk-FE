@@ -9,12 +9,15 @@ import GroupName from '../component/GroupName';
 import Footer from '../component/Footer';
 
 export default function Home() {
+    // 내정보
     const my_info = {
         name: '홍창현',
         profile:
             'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
         id: 1,
     };
+
+    // 친구들정보 mock data
     const friend_list = [
         {
             name: '사람1',
@@ -110,8 +113,12 @@ const HomeContainer = styled.div`
 
 const ContentWrapper = styled.div`
     flex: 1;
-    overflow-y: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
+
+    &:hover {
+        overflow-y: auto;
+    }
 
     &::-webkit-scrollbar {
         width: 10px;

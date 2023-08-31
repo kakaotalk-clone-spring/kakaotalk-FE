@@ -2,6 +2,8 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const Profile = ({ name, profile }) => {
+
+    // 친구들 및 나의 프로필 컴포넌트
     return (
         <ProfileContainer>
             <ProfileImg src={profile} />

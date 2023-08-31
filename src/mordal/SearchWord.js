@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
 
 export default function SearchWord({ title, name, setWordModalOpen }) {
+    // 채팅방 내에 단어검색 : 추가내용필요
     const ref = useRef();
     const [value, setValue] = useState('');
 
