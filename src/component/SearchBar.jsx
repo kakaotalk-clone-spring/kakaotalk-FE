@@ -2,7 +2,6 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 const SearchBar = ({ handleSubmit, value, setValue, placeholder }) => {
-
     // 검색바 컴포넌트
     const handleChange = (e) => {
         setValue(e.target.value);

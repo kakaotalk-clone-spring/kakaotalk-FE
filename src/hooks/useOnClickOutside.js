@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 
 const useOnClickOutside = (ref, handler) => {
-
     // 모달 외부클릭시에 모달이 꺼지는 hook
     useEffect(() => {
         const listener = (event) => {
-            console.log('ref', ref.current);
             if (!ref.current || ref.current.contains(event.target)) {
                 return;
             }
