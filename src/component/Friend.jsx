@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { useChattingRoom } from '../contexts/ChattingRoomContext';
 import ProfileModal from '../mordal/ProfileModal';
-import axios from "../api/axios"
+import axios from '../api/axios';
 import requests from '../api/requests';
 
 const Friend = ({ name, profile, id, onClick, isClicked }) => {
@@ -28,17 +28,20 @@ const Friend = ({ name, profile, id, onClick, isClicked }) => {
 
     const handleFriendProfile = async () => {
         try {
-            const response = await axios.get(`${requests.fetchFriendProfile}/${name}`, {
-                params: {friend_id: `${name}`},
-            });
+            const response = await axios.get(
+                `${requests.fetchFriendProfile}${name}`,
+                {
+                    params: { friend_id: `${name}` },
+                }
+            );
 
             if (response.data.isSuccess) {
-                console.log('친구상세페이지조회 성공');
+                console.log('친구상세조회 성공');
             } else {
-                console.log('친구상세페이지조회 실패:', response.data.message);
+                console.log('친구상세조회 실패:', response.data.message);
             }
         } catch (error) {
-            console.error('친구상세페이지조회 오류:', error);
+            console.error('친구상세조회 오류:', error);
         }
     };
 
@@ -48,9 +51,19 @@ const Friend = ({ name, profile, id, onClick, isClicked }) => {
             isClicked={isClicked}
             onDoubleClick={handleDoubleClick}
         >
-            <ProfileImg src={profile} onClick={() => handleProfileClick() && handleFriendProfile()} />
+            <ProfileImg
+                src={profile}
+                onClick={() => {
+                    handleProfileClick();
+                    handleFriendProfile();
+                }}
+            />
             {profilemodalOpen && (
-                <ProfileModal profile={profile} name={name} setProfileModalOpen={setProfileModalOpen} />
+                <ProfileModal
+                    profile={profile}
+                    name={name}
+                    setProfileModalOpen={setProfileModalOpen}
+                />
             )}
             <ProfileName>{name}</ProfileName>
         </ProfileContainer>

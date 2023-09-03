@@ -62,4 +62,4 @@ const ModalClose = styled.span`
     cursor: pointer;
     z-index: 1000;
     color: black;
-`
+`;
