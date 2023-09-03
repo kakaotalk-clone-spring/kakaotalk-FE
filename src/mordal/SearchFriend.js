@@ -3,11 +3,9 @@ import useOnClickOutside from '../hooks/useOnClickOutside';
 import './AddFriend.css';
 import { styled } from 'styled-components';
 import SearchBar from '../component/SearchBar';
-import axios from 'axios';
-
+import axios from '../api/axios';
 
 export default function SearchFriend({ title, name, setSearchModalOpen }) {
-
     // 친구찾기모달 : 내용추가필요
     const ref = useRef();
     const [value, setValue] = useState('');
@@ -55,6 +53,10 @@ export default function SearchFriend({ title, name, setSearchModalOpen }) {
                             placeholder='친구를 검색해주세요'
                             onSubmit={handleSubmit}
                         />
+                        <button onClick={() => handleFriendSearch()}>
+                            {' '}
+                            친구 목록 조회{' '}
+                        </button>
                     </div>
                 </div>
             </div>

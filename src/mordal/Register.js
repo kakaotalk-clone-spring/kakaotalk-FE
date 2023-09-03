@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import React, { useRef, useState } from 'react';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import './AddFriend.css';

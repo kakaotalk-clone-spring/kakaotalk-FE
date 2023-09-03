@@ -1,12 +1,51 @@
-import React from 'react';
+import axios from '../api/axios';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import requests from '../api/requests';
+import ProfileModal from '../mordal/ProfileModal';
 
 const Profile = ({ name, profile }) => {
+    const [profilemodalOpen, setProfileModalOpen] = useState(false);
 
-    // 친구들 및 나의 프로필 컴포넌트
+    const handleProfileClick = () => {
+        setProfileModalOpen(true);
+    };
+
+    const handleUserProfile = async () => {
+        try {
+            const response = await axios.get(
+                `${requests.fetchUserProfile}${name}`,
+                {
+                    params: { friend_id: `${name}` },
+                }
+            );
+
+            if (response.data.isSuccess) {
+                console.log('사용자상세조회 성공');
+            } else {
+                console.log('사용자상세조회 실패:', response.data.message);
+            }
+        } catch (error) {
+            console.error('사용자상세조회 오류:', error);
+        }
+    };
+    // 나의 프로필 컴포넌트
     return (
         <ProfileContainer>
-            <ProfileImg src={profile} />
+            <ProfileImg
+                src={profile}
+                onClick={() => {
+                    handleProfileClick();
+                    handleUserProfile();
+                }}
+            />
+            {profilemodalOpen && (
+                <ProfileModal
+                    profile={profile}
+                    name={name}
+                    setProfileModalOpen={setProfileModalOpen}
+                />
+            )}
             <ProfileName>{name}</ProfileName>
         </ProfileContainer>
     );
@@ -28,4 +67,5 @@ const ProfileImg = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 20px;
+    cursor: pointer;
 `;

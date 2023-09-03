@@ -8,28 +8,48 @@ const SearchBar = ({ handleSubmit, value, setValue, placeholder }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <SearchContainer
+        <SearchContainer onSubmit={handleSubmit}>
+            <SearchContent
                 type='text'
                 name='value'
                 value={value}
                 onChange={handleChange}
                 placeholder={placeholder}
             />
-        </form>
+            <SubmitBox type='submit' value='입력' />
+        </SearchContainer>
     );
 };
 
 export default SearchBar;
 
-const SearchContainer = styled.input`
-    position: absolute;
+const SearchContainer = styled.form`
+    display: flex;
+    justify-content: center;
+`;
+
+const SearchContent = styled.input`
     background-color: white;
-    border-radius: 0.5rem;
     padding: 0.5rem;
+    margin-right: 0.25rem;
     width: 18rem;
 
     @media (max-width: 18rem) {
+        width: 100%;
+    }
+`;
+
+const SubmitBox = styled.input`
+    background-color: white;
+    padding: 0.5rem;
+    width: 3rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: gray;
+    }
+
+    @media (max-width: 3rem) {
         width: 100%;
     }
 `;
