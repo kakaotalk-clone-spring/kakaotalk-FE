@@ -1,7 +1,7 @@
-import axios from "axios"
+import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: "https://virtserver.swaggerhub.com/ysndy/Chatting-API/1.0.0",
+    baseURL: 'https://localhost:8080',
 });
 
 export default instance;
